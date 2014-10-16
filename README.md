@@ -1,13 +1,14 @@
 ajax_upload
 ===========
 
-## 一个简单的ajax图片上传库
+## 一个简单的html5 ajax图片上传库
 
 ### 依赖jquery和bootstrap(带bootstrap的进度条)
 
 简单使用
 
 只要调用ajax_upload即可。
+当选择图片完成时就会自动上传。
 
 ``` javascript
 $("#input_file").ajax_upload();
