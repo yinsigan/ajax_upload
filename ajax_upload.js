@@ -2,17 +2,20 @@
 
     $.fn.ajax_upload = function() {
       var _this = $(this);
+      var id = $(this).attr("id");
       var progress = _this.data("progress");
       var progress_div = $("#" + progress);
 
-      initFileOnlyAjaxUpload(_this);
+      // 执行
+      initFileOnlyAjaxUpload(_this, id);
 
-      function initFileOnlyAjaxUpload(_this) {
+      function initFileOnlyAjaxUpload(_this, id) {
         _this.on('change', function(evt) {
           var formData = new FormData();
           var action = _this.data("url");
 
-          var file = _this.files[0];
+          var fileInput = document.getElementById(id);
+          var file = fileInput.files[0];
           formData.append(_this.attr("name"), file);
 
           sendXHRequest(formData, action);
@@ -29,6 +32,7 @@
 
         xhr.open('POST', uri, true);
 
+        // Fire!
         xhr.send(formData);
       }
 
@@ -42,10 +46,11 @@
 
       //上传进度
       function onprogressHandler(evt) {
-        progress_div.show;
-        var progress_content = progress_div.child(".progress-bar")
+        progress_div.show();
+        var progress_content = progress_div.children(".progress-bar")
         var percent = evt.loaded/evt.total*100;
-        progress_content.css = { width: percent + '%' };
+        progress_content.width(percent + '%');
+        progress_content.html(percent + '%');
       }
 
       function onreadystatechangeHandler(evt) {
@@ -63,7 +68,7 @@
         //正确返回
         if (readyState == 4 && status == '200' && evt.target.responseText) {
           // evt.target.responseText
-          progress_div.hide();
+          progress_div.delay(1000).fadeOut();
         }
       }
 
