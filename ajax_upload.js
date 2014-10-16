@@ -5,6 +5,7 @@
       var id = $(this).attr("id");
       var progress = _this.data("progress");
       var progress_div = $("#" + progress);
+      var progress_content = progress_div.children(".progress-bar");
 
       // 执行
       initFileOnlyAjaxUpload(_this, id);
@@ -47,10 +48,8 @@
       //上传进度
       function onprogressHandler(evt) {
         progress_div.show();
-        var progress_content = progress_div.children(".progress-bar")
         var percent = evt.loaded/evt.total*100;
         progress_content.width(percent + '%');
-        progress_content.html(percent + '%');
       }
 
       function onreadystatechangeHandler(evt) {
@@ -69,6 +68,10 @@
         if (readyState == 4 && status == '200' && evt.target.responseText) {
           // evt.target.responseText
           progress_div.delay(1000).fadeOut();
+          setTimeout(function() {
+            progress_content.width('1%');
+          }, 2000);
+          eval(evt.target.responseText);
         }
       }
 
