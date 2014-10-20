@@ -15,6 +15,7 @@ $("#input_file").ajax_upload();
 ```
 
 .min-progress 是自己定义的的样式，让bootstrap的进度条更细更好看。data-progress属性指定进度条的id。
+data-url是提交的url地址,后面.progress的都是bootstrap提供的进度条样式。可以参照http://getbootstrap.com/components/#progress
 
 ``` html
 <input data-progress="progress_div" data-url="/public_accounts/21/thumbs" id="image" name="image" type="file" />
